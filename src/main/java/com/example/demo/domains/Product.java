@@ -14,7 +14,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class Product extends BaseEntity {
-
     private String name;
     private String description;
     private Double price;
@@ -25,9 +24,8 @@ public class Product extends BaseEntity {
     @Transient
     private List<String> imageUrls;
 
-    @OneToMany(mappedBy = "product")
-    @JsonIgnore
-    private Set<Category> categories;
-
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }

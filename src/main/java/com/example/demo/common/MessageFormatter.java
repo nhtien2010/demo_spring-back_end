@@ -18,4 +18,7 @@ public class MessageFormatter {
     public static String formatCategoryNotFound(Long id){
         return format("Category id %s not found", id);
     }
+    public static String formatCategoryAlreadyExist(String name){
+        return format("Category %s already exists", name);
+    }
 }

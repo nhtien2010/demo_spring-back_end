@@ -28,21 +28,21 @@ public class UserManagementController {
         return ResponseEntity.ok(userService.updateUser(dto));
 
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/lock", method = RequestMethod.PUT)
     public ResponseEntity<?> lockUser(@Valid @RequestParam("userId") Long userId){
 
         return ResponseEntity.ok(userService.lockUser(userId));
 
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/unlock", method = RequestMethod.PUT)
     public ResponseEntity<?> unlockUser(@Valid @RequestParam("userId") Long userId){
 
         return ResponseEntity.ok(userService.unlockUser(userId));
 
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete", method = RequestMethod.PUT)
     public ResponseEntity<?> deleteUser(@Valid @RequestParam("userId") Long userId){
 

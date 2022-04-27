@@ -23,6 +23,7 @@ public class Order extends BaseEntity{
     private List<ShoppingProduct> shoppingProducts;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserModel userModel;
 
 }

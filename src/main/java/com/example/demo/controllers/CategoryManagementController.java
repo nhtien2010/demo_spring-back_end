@@ -22,17 +22,17 @@ public class CategoryManagementController {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> addCategory(@Valid @RequestBody AddCategoryRequestDto request){
         return ResponseEntity.ok(categoryService.addCategory(request));
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<?> updateCategory(@Valid @RequestBody UpdateCategoryRequestDto request){
         return ResponseEntity.ok(categoryService.updateCategory(request));
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseEntity<?> getAllCategories(@Valid @RequestParam("catId") Long catId){
         return ResponseEntity.ok(categoryService.deleteCategory(catId));

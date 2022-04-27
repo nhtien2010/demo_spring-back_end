@@ -1,13 +1,18 @@
 package com.example.demo.services.impls;
 
 import com.example.demo.common.MessageFormatter;
+import com.example.demo.common.UserRoleEnum;
 import com.example.demo.domains.Category;
 import com.example.demo.domains.UserModel;
+import com.example.demo.domains.UserRole;
 import com.example.demo.dtos.requests.AddCategoryRequestDto;
+import com.example.demo.dtos.requests.RegisterAdminRequestDto;
 import com.example.demo.dtos.requests.UpdateCategoryRequestDto;
 import com.example.demo.dtos.responses.CartResponseDto;
 import com.example.demo.dtos.responses.CategoryResponseDto;
 import com.example.demo.dtos.responses.UserResponseDto;
+import com.example.demo.exceptions.BadRequestException;
+import com.example.demo.exceptions.ConflictRequestException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.CategoryRepository;
 import com.example.demo.services.CategoryService;
@@ -15,6 +20,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
                 .orElseThrow(() -> new NotFoundException(
                         MessageFormatter.formatCategoryNotFound(id)));
     }
+    public Boolean isCategoryExist(String name){
+        return categoryRepository.findByName(name).isPresent();
+    }
 
     @Override
     public List<CategoryResponseDto> getAllCategories() {
@@ -40,7 +52,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResponseDto addCategory(AddCategoryRequestDto dto) {
-        return null;
+        boolean isExisted = isCategoryExist(dto.getName());
+        if(isExisted){
+            throw new ConflictRequestException(MessageFormatter.formatCategoryAlreadyExist(dto.getName()));
+        }
+        Category category = mapper.map(dto, Category.class);
+        category.setCreatedDate(Date.from(Instant.now()));
+        category.setUpdatedDate(Date.from(Instant.now()));
+        categoryRepository.save(category);
+        return mapper.map(category, CategoryResponseDto.class);
     }
 
     @Override
@@ -52,6 +72,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResponseDto updateCategory(UpdateCategoryRequestDto dto) {
-        return null;
+        getCategoryById(dto.getId());
+        Category update = mapper.map(dto, Category.class);
+        update.setUpdatedDate(Date.from(Instant.now()));
+        categoryRepository.save(update);
+        return mapper.map(update, CategoryResponseDto.class);
     }
 }

@@ -26,17 +26,17 @@ public class ProductManagementController {
         return ResponseEntity.ok(productService.listProducts());
     }
 
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<?> addProduct(@Valid @RequestBody AddProductRequestDto request){
         return ResponseEntity.ok(productService.addProduct(request));
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<?> updateProduct(@Valid @RequestBody UpdateProductRequestDto request){
         return ResponseEntity.ok(productService.updateProduct(request));
     }
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteProduct(@Valid @RequestParam("prId") Long prId){
         return ResponseEntity.ok(productService.deleteProduct(prId));

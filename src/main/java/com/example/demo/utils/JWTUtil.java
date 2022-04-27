@@ -1,6 +1,7 @@
 package com.example.demo.utils;
 
 import com.example.demo.domains.UserModel;
+import com.example.demo.exceptions.UnauthorizedRequestException;
 import com.nimbusds.jose.jwk.JWKException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -57,9 +58,9 @@ public class JWTUtil {
 
     private String createToken(Map<String, Object> claims, String subject,long expirationMin) {
         return Jwts.builder()
+                .setClaims(claims)
                 .setId(UUID.randomUUID().toString())
                 .setSubject(subject)
-                .setClaims(claims)
                 .setIssuer(issuer)
                 .setAudience(audience)
                 .setIssuedAt(Date.from(Instant.now()))
@@ -69,7 +70,7 @@ public class JWTUtil {
     }
 
     private  Claims extractAllClaims(String token){
-        return  Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJwt(token).getBody();
+        return  Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
     }
 
     private Claims parseClaimsFromToken(String token, String subject) {
@@ -80,9 +81,8 @@ public class JWTUtil {
                     .requireAudience(audience)
                     .requireSubject(subject)
                     .build()
-                    .parseClaimsJwt(token);
+                    .parseClaimsJws(token);
             return jwt.getBody();
-
         }
         catch (SignatureException e) {
             logger.error("Invalid JWT signature: {}", e.getMessage());
@@ -97,7 +97,7 @@ public class JWTUtil {
         }catch (InvalidClaimException e){
             logger.error("Invalid claims jwt: {}", e.getMessage());
         }
-        return null;
+        throw new UnauthorizedRequestException("invalid token");
     }
 
     public boolean validateToken(String token, UserModel userModel) {

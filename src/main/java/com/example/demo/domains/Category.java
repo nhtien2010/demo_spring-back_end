@@ -1,9 +1,11 @@
 package com.example.demo.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -12,7 +14,7 @@ public class Category extends BaseEntity{
     private String name;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @OneToMany(mappedBy = "category")
+    @JsonIgnore
+    private Set<Product> products;
 }

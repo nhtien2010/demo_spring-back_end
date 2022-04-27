@@ -23,7 +23,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler  {
                 new ExceptionResponseDto(status.value(), message, Instant.now()), status);
     }
 
-    @ExceptionHandler(value = {BadRequestException.class})
+    @ExceptionHandler(value = {ForbiddenRequestException.class, })
+    public final ResponseEntity<ExceptionResponseDto> handleForbiddenRequestException(RuntimeException ex, WebRequest request) {
+        return buildResponse(ForbiddenRequestException.status, ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {UnauthorizedRequestException.class, })
+    public final ResponseEntity<ExceptionResponseDto> handleUnauthorizedRequestException(RuntimeException ex, WebRequest request) {
+        return buildResponse(UnauthorizedRequestException.status, ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {BadRequestException.class, })
     public final ResponseEntity<ExceptionResponseDto> handleBadRequestException(RuntimeException ex, WebRequest request) {
         return buildResponse(BadRequestException.status, ex.getMessage());
     }
