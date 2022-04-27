@@ -1,0 +1,29 @@
+{
+  "properties": [
+    {
+      "name": "demo.jwt.secret_key",
+      "type": "java.lang.String",
+      "description": "Description for demo.jwt.secret_key."
+    },
+    {
+      "name": "demo.jwt.audience",
+      "type": "java.lang.String",
+      "description": "Description for demo.jwt.audience."
+    },
+    {
+      "name": "demo.jwt.issuer",
+      "type": "java.lang.String",
+      "description": "Description for demo.jwt.issuer."
+    },
+    {
+      "name": "demo.jwt.token.access_minutes",
+      "type": "java.lang.String",
+      "description": "Description for demo.jwt.token.access_minutes."
+    },
+    {
+      "name": "demo.jwt.token.refresh_minutes",
+      "type": "java.lang.String",
+      "description": "Description for demo.jwt.token.refresh_minutes."
+    }
+  ]
+}
