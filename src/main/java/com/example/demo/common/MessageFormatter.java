@@ -4,7 +4,7 @@ import static java.lang.String.format;
 
 public class MessageFormatter {
     public static String formatUserNotFound(Long userId){
-        return format("User %s not found", userId);
+        return format("User id %s not found", userId);
     }
     public static String formatUserNotFound(String username){
         return format("User %s not found", username);
@@ -14,5 +14,8 @@ public class MessageFormatter {
     }
     public static String formatInvalidRequestInput(String input){
         return format("Invalid request input - %s", input);
+    }
+    public static String formatCategoryNotFound(Long id){
+        return format("Category id %s not found", id);
     }
 }

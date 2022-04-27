@@ -41,7 +41,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler  {
 
     @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<Object> handleRemainExceptions(RuntimeException ex){
-        logger.error("Remain exception : {}", ex.getMessage());
+        logger.error("Remain exception handler: {}", ex.getMessage());
         return new ResponseEntity<>(ex, HttpStatus.valueOf(400));
     }
 
