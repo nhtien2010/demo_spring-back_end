@@ -18,9 +18,7 @@ public class UserManagementController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<?> getUser(@Valid @RequestParam("userId") Long userId){
-
         return ResponseEntity.ok(userService.getUser(userId));
-
     }
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<?> updateUser(@Valid @RequestBody UpdateUserRequestDto dto){

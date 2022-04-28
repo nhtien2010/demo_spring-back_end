@@ -17,7 +17,6 @@ public class Cart extends  BaseEntity {
     private Double totalPrice;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<ShoppingProduct> shoppingProducts;
 
     @OneToOne(cascade = CascadeType.ALL)

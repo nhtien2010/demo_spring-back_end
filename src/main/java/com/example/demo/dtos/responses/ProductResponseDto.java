@@ -25,6 +25,6 @@ public class ProductResponseDto {
     private String brand;
 
     private List<String> imageUrls;
-
     private Set<CategoryResponseDto> categories;
+    private Set<RatingResponseDto> ratings;
 }

@@ -57,10 +57,15 @@ public class CategoryServiceImpl implements CategoryService {
             throw new ConflictRequestException(MessageFormatter.formatCategoryAlreadyExist(dto.getName()));
         }
         Category category = mapper.map(dto, Category.class);
-        category.setCreatedDate(Date.from(Instant.now()));
-        category.setUpdatedDate(Date.from(Instant.now()));
+        category.setCreatedDate();
+        category.setUpdatedDate();
         categoryRepository.save(category);
         return mapper.map(category, CategoryResponseDto.class);
+    }
+
+    @Override
+    public CategoryResponseDto getCategory(Long id) {
+        return mapper.map(getCategoryById(id), CategoryResponseDto.class);
     }
 
     @Override
@@ -74,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponseDto updateCategory(UpdateCategoryRequestDto dto) {
         getCategoryById(dto.getId());
         Category update = mapper.map(dto, Category.class);
-        update.setUpdatedDate(Date.from(Instant.now()));
+        update.setUpdatedDate();
         categoryRepository.save(update);
         return mapper.map(update, CategoryResponseDto.class);
     }

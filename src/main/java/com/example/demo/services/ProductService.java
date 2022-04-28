@@ -1,10 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.dtos.requests.*;
-import com.example.demo.dtos.responses.CartResponseDto;
-import com.example.demo.dtos.responses.CategoryResponseDto;
-import com.example.demo.dtos.responses.ProductResponseDto;
-import com.example.demo.dtos.responses.UserResponseDto;
+import com.example.demo.dtos.responses.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +14,9 @@ public interface ProductService {
     ProductResponseDto addProduct(AddProductRequestDto dto);
     Boolean deleteProduct(Long prdId);
     ProductResponseDto updateProduct(UpdateProductRequestDto dto);
+
+    RatingResponseDto addRatingProduct(AddRatingRequestDto dto);
+    RatingResponseDto updateRatingProduct(UpdateRatingRequestDto dto);
+    Boolean deleteRatingProduct(Long id);
+    List<RatingResponseDto> listRatingByProductId(Long productId);
 }

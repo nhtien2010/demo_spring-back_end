@@ -20,6 +20,9 @@ public class Product extends BaseEntity {
     private String currency;
     private int inStock;
     private String brand;
+    private String color;
+    private String prototype;
+    private String configuration;
 
     @Transient
     private List<String> imageUrls;
@@ -27,5 +30,8 @@ public class Product extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private Set<Rating> ratings;
 
 }

@@ -1,8 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.requests.AddProductRequestDto;
-import com.example.demo.dtos.requests.RegisterRequestDto;
-import com.example.demo.dtos.requests.UpdateProductRequestDto;
+import com.example.demo.dtos.requests.*;
 import com.example.demo.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +38,24 @@ public class ProductManagementController {
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteProduct(@Valid @RequestParam("prId") Long prId){
         return ResponseEntity.ok(productService.deleteProduct(prId));
+    }
+
+    @RequestMapping(value = "/Rating/list", method = RequestMethod.GET)
+    public ResponseEntity<?> listProductRatings(@Valid @RequestParam Long prId){
+        return ResponseEntity.ok(productService.listRatingByProductId(prId));
+    }
+
+    @RequestMapping(value = "/Rating/add", method = RequestMethod.POST)
+    public ResponseEntity<?> addRating(@Valid @RequestBody AddRatingRequestDto request){
+        return ResponseEntity.ok(productService.addRatingProduct(request));
+    }
+    @RequestMapping(value = "/Rating/update", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateRating(@Valid @RequestBody UpdateRatingRequestDto request){
+        return ResponseEntity.ok(productService.updateRatingProduct(request));
+    }
+    @RequestMapping(value = "/Rating/delete", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteRating(@Valid @RequestParam("ratingId") Long ratingId){
+        return ResponseEntity.ok(productService.deleteRatingProduct(ratingId));
     }
 
 }

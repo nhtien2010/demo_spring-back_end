@@ -1,5 +1,6 @@
 package com.example.demo.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,9 @@ public class UserModel extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "userModel")
     private List<Order> orders;
+
+    @OneToMany(mappedBy = "userModel")
+    private Set<Rating> ratings;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

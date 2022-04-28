@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     public Boolean lockUser(Long userId) {
         UserModel userModel = getUserById(userId);
         userModel.setIsLocked(true);
-        userModel.setUpdatedDate(Date.from(Instant.now()));
+        userModel.setUpdatedDate();
         userRepository.save(userModel);
         return true;
     }
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     public Boolean unlockUser(Long userId) {
         UserModel userModel = getUserById(userId);
         userModel.setIsLocked(false);
-        userModel.setUpdatedDate(Date.from(Instant.now()));
+        userModel.setUpdatedDate();
         userRepository.save(userModel);
         return true;
     }
@@ -110,8 +110,8 @@ public class UserServiceImpl implements UserService {
                 throw new BadRequestException(MessageFormatter.formatInvalidRequestInput(role));
             }
         }
-        userModel.setCreatedDate(Date.from(Instant.now()));
-        userModel.setUpdatedDate(Date.from(Instant.now()));
+        userModel.setCreatedDate();
+        userModel.setUpdatedDate();
         userRepository.save(userModel);
         return mapper.map(userModel, UserResponseDto.class);
     }
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto updateUser(UpdateUserRequestDto userRequest) {
         getUserById(userRequest.getId());
         UserModel update = mapper.map(userRequest, UserModel.class);
-        update.setUpdatedDate(Date.from(Instant.now()));
+        update.setUpdatedDate();
         userRepository.save(update);
         return mapper.map(update, UserResponseDto.class);
     }

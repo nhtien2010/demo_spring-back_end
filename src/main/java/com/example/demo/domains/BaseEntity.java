@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -22,6 +23,14 @@ public abstract class BaseEntity implements Serializable {
     private Date createdDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+    public void setUpdatedDate() {
+        this.updatedDate = Date.from(Instant.now());
+    }
+    public void setCreatedDate() {
+        this.createdDate = Date.from(Instant.now());
+        this.updatedDate = this.createdDate;
+    }
 
     @Override
     public boolean equals(Object o) {

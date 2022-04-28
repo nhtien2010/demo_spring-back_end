@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter@Setter
-public class UpdateCategoryRequestDto {
+public class UpdateRatingRequestDto {
     private Long id;
-    private String name;
-    private String description;
+    private float rating;
+    private String comment;
 }

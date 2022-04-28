@@ -20,4 +20,8 @@ public class MessageFormatter {
         return format("Category %s already exists", name);
     }
     public static String formatProductNotFound(Long id){ return format("Product id %s not found", id); }
+    public static String formatRatingNotFound(Long userId, Long productId){ return format("Rating with (product_id: %s, user_id: %s) not found", productId, userId); }
+    public static String formatUserAlreadyRatingProduct(Long userId, Long productId){ return format("Rating with (product_id: %s, user_id: %s) already exists", productId, userId); }
+    public static String formatRatingNotFound(Long id){ return format("Rating id %s not found", id); }
+    public static String formatUnprivilegedRequest(String action){ return format("Request unprivileged for: %s", action); }
 }

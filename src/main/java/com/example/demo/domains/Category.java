@@ -15,6 +15,5 @@ public class Category extends BaseEntity{
     private String description;
 
     @OneToMany(mappedBy = "category")
-    @JsonIgnore
     private Set<Product> products;
 }
