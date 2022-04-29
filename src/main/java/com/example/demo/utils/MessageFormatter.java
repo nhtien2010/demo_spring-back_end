@@ -24,4 +24,11 @@ public class MessageFormatter {
     public static String formatUserAlreadyRatingProduct(Long userId, Long productId){ return format("Rating with (product_id: %s, user_id: %s) already exists", productId, userId); }
     public static String formatRatingNotFound(Long id){ return format("Rating id %s not found", id); }
     public static String formatUnprivilegedRequest(String action){ return format("Request unprivileged for: %s", action); }
+    public static String formatUserCartNotFound(Long userId){
+        return format("User cart %s not found", userId);
+    }
+    public static String formatUserOrdersNotFound(Long userId){
+        return format("User orders %s not found", userId);
+    }
+
 }

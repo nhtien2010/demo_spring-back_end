@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
             Map.entry("price", Double.class),
             Map.entry("brand", String.class),
             Map.entry("color", String.class),
-            Map.entry("category", Category.class),
+            Map.entry("category_id", Long.class),
             Map.entry("updatedDate", Date.class));
 
     private Product getProductById(Long id) {
@@ -89,9 +89,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponseDto> listProducts(ListProductRequestDto dto) {
-        isValidCriteria(dto.getCriteria());
-
-        SearchSpecificationFilter<Product> filter = new SearchSpecificationFilter<>(dto.getCriteria());
+        List<SearchCriterion> criteria = dto.getCriteria();
+        isValidCriteria(criteria);
+        //
+        SearchSpecificationFilter<Product> filter = new SearchSpecificationFilter<>(criteria);
         Specification<Product> specification = filter.build();
         List<Product> products = productRepository.findAll(specification);
 

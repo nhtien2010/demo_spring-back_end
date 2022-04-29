@@ -27,8 +27,8 @@ public class ShoppingController {
     }
 
     @RequestMapping(value = "/getCart", method = RequestMethod.GET)
-    public ResponseEntity<?> getCart(@Valid @RequestParam("userId") Long userId){
-        return ResponseEntity.ok(shoppingService.getCart(userId));
+    public ResponseEntity<?> getCart(){
+        return ResponseEntity.ok(shoppingService.getCart());
     }
 
 
@@ -37,10 +37,10 @@ public class ShoppingController {
         return ResponseEntity.ok(shoppingService.getOrder(orderId));
     }
     @RequestMapping(value = "/listOrders", method = RequestMethod.GET)
-    public ResponseEntity<?> getOrders(@Valid @RequestParam("userId") Long userId){
-        return ResponseEntity.ok(shoppingService.getOrders(userId));
+    public ResponseEntity<?> getOrders(){
+        return ResponseEntity.ok(shoppingService.getOrders());
     }
-    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @RequestMapping(value = "/ordering", method = RequestMethod.POST)
     public ResponseEntity<?> addProduct(@Valid @RequestBody OrderRequestDto dto){
         return ResponseEntity.ok(shoppingService.orderProducts(dto));
     }

@@ -11,9 +11,10 @@ import java.util.List;
 
 public interface ShoppingService {
     CartResponseDto updateCart(UpdateCartRequestDto dto);
-    CartResponseDto getCart(Long userId);
+    CartResponseDto getCart(Long cartId);
+    CartResponseDto getCart();
     OrderResponseDto getOrder(Long orderId);
-    List<OrderResponseDto> getOrders(Long userId);
+    List<OrderResponseDto> getOrders();
     CartResponseDto addProductToCart(ShoppingProductRequestDto dto);
     OrderResponseDto orderProducts(OrderRequestDto dto);
 

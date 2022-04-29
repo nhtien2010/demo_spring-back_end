@@ -14,8 +14,6 @@ import java.util.*;
 @Getter
 @Setter
 public class UserModel extends BaseEntity implements UserDetails {
-
-
     private String username;
     private String password;
     private String name;
@@ -28,13 +26,13 @@ public class UserModel extends BaseEntity implements UserDetails {
     @ElementCollection
     private Set<UserRole> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userModel")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userModel",fetch = FetchType.LAZY)
     private Cart cart;
 
-    @OneToMany(mappedBy = "userModel")
+    @OneToMany(mappedBy = "userModel",fetch = FetchType.LAZY)
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "userModel")
+    @OneToMany(mappedBy = "userModel",fetch = FetchType.LAZY)
     private Set<Rating> ratings;
 
     @Override
