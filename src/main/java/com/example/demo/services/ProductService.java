@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProductService {
     ProductResponseDto getProduct(Long pdId);
-    List<ProductResponseDto> listProducts();
+    List<ProductResponseDto> listProducts(ListProductRequestDto dto);
     ProductResponseDto addProduct(AddProductRequestDto dto);
     Boolean deleteProduct(Long prdId);
     ProductResponseDto updateProduct(UpdateProductRequestDto dto);

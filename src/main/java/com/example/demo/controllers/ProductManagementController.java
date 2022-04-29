@@ -19,9 +19,9 @@ public class ProductManagementController {
     public ResponseEntity<?> getProduct(@Valid @PathVariable Long prId){
         return ResponseEntity.ok(productService.getProduct(prId));
     }
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<?> listProducts(){
-        return ResponseEntity.ok(productService.listProducts());
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public ResponseEntity<?> listProducts(@Valid @RequestBody ListProductRequestDto request){
+        return ResponseEntity.ok(productService.listProducts(request));
     }
 
     @PreAuthorize(value = "hasAuthority('ADMIN')")
@@ -40,8 +40,8 @@ public class ProductManagementController {
         return ResponseEntity.ok(productService.deleteProduct(prId));
     }
 
-    @RequestMapping(value = "/Rating/list", method = RequestMethod.GET)
-    public ResponseEntity<?> listProductRatings(@Valid @RequestParam Long prId){
+    @RequestMapping(value = "/{prId}/Rating/list", method = RequestMethod.GET)
+    public ResponseEntity<?> listProductRatings(@Valid @PathVariable Long prId){
         return ResponseEntity.ok(productService.listRatingByProductId(prId));
     }
 

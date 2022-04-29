@@ -1,16 +1,10 @@
 package com.example.demo.configs;
 
-import com.example.demo.common.MessageFormatter;
+import com.example.demo.utils.MessageFormatter;
 import com.example.demo.filters.AuthenticateJWTFilter;
 import com.example.demo.repositories.UserRepository;
-import com.example.demo.services.UserService;
-import com.example.demo.services.impls.UserServiceImpl;
-import com.example.demo.utils.JWTUtil;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

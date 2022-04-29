@@ -1,12 +1,11 @@
 package com.example.demo.services.impls;
 
-import com.example.demo.common.MessageFormatter;
+import com.example.demo.utils.MessageFormatter;
 import com.example.demo.common.UserRoleEnum;
 import com.example.demo.domains.UserModel;
 import com.example.demo.domains.UserRole;
 import com.example.demo.dtos.requests.RegisterAdminRequestDto;
 import com.example.demo.dtos.requests.RegisterRequestDto;
-import com.example.demo.dtos.requests.RegisterUserRequestDto;
 import com.example.demo.dtos.requests.UpdateUserRequestDto;
 import com.example.demo.dtos.responses.UserResponseDto;
 import com.example.demo.exceptions.BadRequestException;
@@ -16,18 +15,14 @@ import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.expression.Sets;
 
-import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.lang.String.format;
 

@@ -1,18 +1,12 @@
 package com.example.demo.services.impls;
 
-import com.example.demo.common.MessageFormatter;
+import com.example.demo.utils.MessageFormatter;
 import com.example.demo.domains.UserModel;
 import com.example.demo.dtos.requests.LoginRequestDto;
-import com.example.demo.dtos.requests.RegisterAdminRequestDto;
 import com.example.demo.dtos.requests.RegisterRequestDto;
-import com.example.demo.dtos.requests.RegisterUserRequestDto;
 import com.example.demo.dtos.responses.LoginResponseDto;
 import com.example.demo.dtos.responses.UserResponseDto;
 import com.example.demo.exceptions.BadRequestException;
-import com.example.demo.exceptions.GlobalExceptionHandler;
-import com.example.demo.exceptions.NotFoundException;
-import com.example.demo.repositories.AuthenticateRepository;
-import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.AuthenticateService;
 import com.example.demo.services.UserService;
 import com.example.demo.utils.JWTUtil;
@@ -22,9 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,20 +1,19 @@
 package com.example.demo.services.impls;
 
-import com.example.demo.common.MessageFormatter;
 import com.example.demo.domains.Category;
+import com.example.demo.filters.search.SearchCriterion;
+import com.example.demo.filters.search.SearchSpecificationFilter;
+import com.example.demo.utils.MessageFormatter;
 import com.example.demo.domains.Product;
 import com.example.demo.domains.Rating;
 import com.example.demo.domains.UserModel;
 import com.example.demo.dtos.requests.*;
-import com.example.demo.dtos.responses.CategoryResponseDto;
 import com.example.demo.dtos.responses.ProductResponseDto;
 import com.example.demo.dtos.responses.RatingResponseDto;
-import com.example.demo.dtos.responses.UserResponseDto;
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.ConflictRequestException;
 import com.example.demo.exceptions.ForbiddenRequestException;
 import com.example.demo.exceptions.NotFoundException;
-import com.example.demo.repositories.CategoryRepository;
 import com.example.demo.repositories.ProductRepository;
 import com.example.demo.repositories.RatingRepository;
 import com.example.demo.services.CategoryService;
@@ -22,13 +21,12 @@ import com.example.demo.services.ProductService;
 import com.example.demo.utils.AuthenticationUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Auditable;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,11 +39,20 @@ public class ProductServiceImpl implements ProductService {
     private final AuthenticationUtil authenticationUtil;
 
 
+    private final Map<String, Object> acceptedFilterField = Map.ofEntries(
+            Map.entry("name", String.class),
+            Map.entry("price", Double.class),
+            Map.entry("brand", String.class),
+            Map.entry("color", String.class),
+            Map.entry("category", Category.class),
+            Map.entry("updatedDate", Date.class));
+
     private Product getProductById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(
                         MessageFormatter.formatProductNotFound(id)));
     }
+
     private Rating getRating(Long id) {
         return ratingRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(
@@ -64,6 +71,16 @@ public class ProductServiceImpl implements ProductService {
         return ratingRepository.existsRatingByUserModelIdAndProductId(userId, productId);
     }
 
+    private Boolean isValidCriteria(List<SearchCriterion> criteria) {
+        for (var element : criteria) {
+            var field = acceptedFilterField.get(element.getField());
+            if(field == null || !element.getValue().getClass().equals(field.getClass())){
+                throw new BadRequestException(MessageFormatter.formatInvalidRequestInput(element.getField()));
+            }
+        }
+        return true;
+    }
+
     @Override
     public ProductResponseDto getProduct(Long pdId) {
         Product product = getProductById(pdId);
@@ -71,8 +88,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponseDto> listProducts() {
-        return null;
+    public List<ProductResponseDto> listProducts(ListProductRequestDto dto) {
+        isValidCriteria(dto.getCriteria());
+
+        SearchSpecificationFilter<Product> filter = new SearchSpecificationFilter<>(dto.getCriteria());
+        Specification<Product> specification = filter.build();
+        List<Product> products = productRepository.findAll(specification);
+
+        return products.stream()
+                .map(entity -> mapper.map(entity, ProductResponseDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -133,7 +158,7 @@ public class ProductServiceImpl implements ProductService {
         }
         Rating rating = getRating(dto.getId());
         UserModel user = authenticationUtil.getUserClaim();
-        if(!user.getId().equals(rating.getUserModel().getId())){
+        if (!user.getId().equals(rating.getUserModel().getId())) {
             throw new ForbiddenRequestException(MessageFormatter.formatUnprivilegedRequest("update rating"));
         }
         Rating update = mapper.map(dto, Rating.class);
@@ -146,7 +171,7 @@ public class ProductServiceImpl implements ProductService {
     public Boolean deleteRatingProduct(Long id) {
         Rating rating = getRating(id);
         UserModel user = authenticationUtil.getUserClaim();
-        if(!user.getId().equals(rating.getUserModel().getId())){
+        if (!user.getId().equals(rating.getUserModel().getId())) {
             throw new ForbiddenRequestException(MessageFormatter.formatUnprivilegedRequest("delete rating"));
         }
         ratingRepository.delete(rating);
