@@ -6,5 +6,5 @@ public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {
         super(message);
     }
-    final static HttpStatus status = HttpStatus.NOT_FOUND;
+    public final static HttpStatus status = HttpStatus.NOT_FOUND;
 }

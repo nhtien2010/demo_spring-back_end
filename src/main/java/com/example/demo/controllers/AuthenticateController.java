@@ -1,15 +1,11 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.requests.LoginRequestDto;
-import com.example.demo.dtos.requests.RegisterAdminRequestDto;
-import com.example.demo.dtos.requests.RegisterUserRequestDto;
+import com.example.demo.dtos.requests.dtos.LoginRequestDto;
+import com.example.demo.dtos.requests.dtos.RegisterAdminRequestDto;
+import com.example.demo.dtos.requests.dtos.RegisterUserRequestDto;
 import com.example.demo.services.AuthenticateService;
-import com.example.demo.services.UserService;
-import com.example.demo.utils.JWTUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

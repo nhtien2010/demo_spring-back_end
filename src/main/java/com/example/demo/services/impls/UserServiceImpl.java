@@ -1,12 +1,13 @@
 package com.example.demo.services.impls;
 
+import com.example.demo.utils.AuthenticationUtil;
 import com.example.demo.utils.MessageFormatter;
 import com.example.demo.common.UserRoleEnum;
 import com.example.demo.domains.UserModel;
 import com.example.demo.domains.UserRole;
-import com.example.demo.dtos.requests.RegisterAdminRequestDto;
-import com.example.demo.dtos.requests.RegisterRequestDto;
-import com.example.demo.dtos.requests.UpdateUserRequestDto;
+import com.example.demo.dtos.requests.dtos.RegisterAdminRequestDto;
+import com.example.demo.dtos.requests.dtos.RegisterRequestDto;
+import com.example.demo.dtos.requests.dtos.UpdateUserRequestDto;
 import com.example.demo.dtos.responses.UserResponseDto;
 import com.example.demo.exceptions.BadRequestException;
 import com.example.demo.exceptions.ConflictRequestException;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper mapper;
+    private final AuthenticationUtil authenticationUtil;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -120,8 +122,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto updateUser(UpdateUserRequestDto userRequest) {
-        getUserById(userRequest.getId());
+        UserModel user = authenticationUtil.getUserClaim();
         UserModel update = mapper.map(userRequest, UserModel.class);
+        update.setId(user.getId());
         update.setUpdatedDate();
         userRepository.save(update);
         return mapper.map(update, UserResponseDto.class);

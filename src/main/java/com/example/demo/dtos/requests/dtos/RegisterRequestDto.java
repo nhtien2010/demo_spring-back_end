@@ -1,4 +1,4 @@
-package com.example.demo.dtos.requests;
+package com.example.demo.dtos.requests.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

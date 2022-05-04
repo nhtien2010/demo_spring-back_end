@@ -1,4 +1,4 @@
-package com.example.demo.dtos.requests;
+package com.example.demo.dtos.requests.dtos;
 
 import com.example.demo.domains.Cart;
 import com.example.demo.domains.Order;
@@ -16,8 +16,6 @@ import java.util.Set;
 
 @Getter@Setter
 public class UpdateUserRequestDto {
-    private Long id;
-    //private String username;
     private String name;
     private String email;
     private String phoneNumber;

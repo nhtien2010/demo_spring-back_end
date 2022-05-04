@@ -1,13 +1,12 @@
 package com.example.demo.services.impls;
 
-import com.example.demo.domains.Category;
+import com.example.demo.dtos.requests.dtos.*;
 import com.example.demo.filters.search.SearchCriterion;
 import com.example.demo.filters.search.SearchSpecificationFilter;
 import com.example.demo.utils.MessageFormatter;
 import com.example.demo.domains.Product;
 import com.example.demo.domains.Rating;
 import com.example.demo.domains.UserModel;
-import com.example.demo.dtos.requests.*;
 import com.example.demo.dtos.responses.ProductResponseDto;
 import com.example.demo.dtos.responses.RatingResponseDto;
 import com.example.demo.exceptions.BadRequestException;

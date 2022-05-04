@@ -1,4 +1,4 @@
-package com.example.demo.dtos.requests;
+package com.example.demo.dtos.requests.dtos;
 
 import com.example.demo.domains.Category;
 import lombok.Getter;

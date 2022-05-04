@@ -1,9 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.requests.AddCategoryRequestDto;
-import com.example.demo.dtos.requests.UpdateCategoryRequestDto;
+import com.example.demo.dtos.requests.dtos.AddCategoryRequestDto;
+import com.example.demo.dtos.requests.dtos.UpdateCategoryRequestDto;
 import com.example.demo.services.CategoryService;
-import com.example.demo.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,4 +1,4 @@
-package com.example.demo.dtos.requests;
+package com.example.demo.dtos.requests.interfaces;
 
 import java.util.HashMap;
 import java.util.Map;

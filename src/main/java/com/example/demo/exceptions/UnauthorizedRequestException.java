@@ -11,5 +11,5 @@ public class UnauthorizedRequestException extends RuntimeException{
        public UnauthorizedRequestException(String message) {
             super(message);
         }
-        final static HttpStatus status = HttpStatus.UNAUTHORIZED;
+        public final static HttpStatus status = HttpStatus.UNAUTHORIZED;
 }

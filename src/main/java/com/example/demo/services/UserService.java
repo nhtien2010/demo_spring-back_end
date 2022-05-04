@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.dtos.requests.RegisterRequestDto;
-import com.example.demo.dtos.requests.UpdateUserRequestDto;
+import com.example.demo.dtos.requests.dtos.RegisterRequestDto;
+import com.example.demo.dtos.requests.dtos.UpdateUserRequestDto;
 import com.example.demo.dtos.responses.UserResponseDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

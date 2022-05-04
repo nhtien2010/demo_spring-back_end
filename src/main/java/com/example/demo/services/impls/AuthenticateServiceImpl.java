@@ -2,8 +2,8 @@ package com.example.demo.services.impls;
 
 import com.example.demo.utils.MessageFormatter;
 import com.example.demo.domains.UserModel;
-import com.example.demo.dtos.requests.LoginRequestDto;
-import com.example.demo.dtos.requests.RegisterRequestDto;
+import com.example.demo.dtos.requests.dtos.LoginRequestDto;
+import com.example.demo.dtos.requests.dtos.RegisterRequestDto;
 import com.example.demo.dtos.responses.LoginResponseDto;
 import com.example.demo.dtos.responses.UserResponseDto;
 import com.example.demo.exceptions.BadRequestException;

@@ -1,9 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.requests.OrderRequestDto;
-import com.example.demo.dtos.requests.ShoppingProductRequestDto;
-import com.example.demo.dtos.requests.UpdateCartRequestDto;
-import com.example.demo.services.ProductService;
+import com.example.demo.dtos.requests.dtos.OrderRequestDto;
+import com.example.demo.dtos.requests.dtos.ShoppingProductRequestDto;
+import com.example.demo.dtos.requests.dtos.UpdateCartRequestDto;
 import com.example.demo.services.ShoppingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

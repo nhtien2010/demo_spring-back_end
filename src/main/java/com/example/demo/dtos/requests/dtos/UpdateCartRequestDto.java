@@ -1,4 +1,4 @@
-package com.example.demo.dtos.requests;
+package com.example.demo.dtos.requests.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,8 +6,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter@Setter
-public class OrderRequestDto {
-    private String address;
-    private String phoneNumber;
+public class UpdateCartRequestDto {
     private List<ShoppingProductRequestDto> shoppingProducts;
 }

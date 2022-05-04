@@ -13,5 +13,5 @@ public class ForbiddenRequestException extends RuntimeException {
         super(message);
     }
 
-    final static HttpStatus status = HttpStatus.FORBIDDEN;
+    public final static HttpStatus status = HttpStatus.FORBIDDEN;
 }

@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.requests.*;
+import com.example.demo.dtos.requests.dtos.*;
 import com.example.demo.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
